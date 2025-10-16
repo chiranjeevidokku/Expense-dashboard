@@ -14,9 +14,9 @@ class Users(Base):
     id = Column(Integer, primary_key=True)
     name = Column(String(50), nullable=False)
 
-    expenditure = relationship('Expenditure', back_populates='users')
-    income = relationship('Income', back_populates='users')
-    savings = relationship('Savings', back_populates='users')
+    expenditure = relationship('Expenditure', back_populates='users', cascade='all, delete-orphan', passive_deletes=True)
+    income = relationship('Income', back_populates='users', cascade='all, delete-orphan', passive_deletes=True)
+    savings = relationship('Savings', back_populates='users', cascade='all, delete-orphan', passive_deletes=True)
 
 
 class Expenditure(Base):
@@ -33,7 +33,7 @@ class Expenditure(Base):
 
     id = Column(Integer, primary_key=True)
     type = Column(String(50), nullable=False)
-    userid = Column(Integer, nullable=True)
+    userid = Column(Integer, ForeignKey('users.id', ondelete='CASCADE'), nullable=False)
     amount = Column(Integer, nullable=True)
     month = Column(String(20), nullable=True)
     year = Column(Integer, nullable=True)
@@ -55,7 +55,7 @@ class Income(Base):
 
     id = Column(Integer, primary_key=True)
     type = Column(String(50), nullable=False)
-    userid = Column(Integer, nullable=True)
+    userid = Column(Integer, ForeignKey('users.id', ondelete='CASCADE'), nullable=False)
     amount = Column(Integer, nullable=True)
     month = Column(String(20), nullable=True)
     year = Column(Integer, nullable=True)
@@ -77,7 +77,7 @@ class Savings(Base):
 
     id = Column(Integer, primary_key=True)
     type = Column(String(50), nullable=False)
-    userid = Column(Integer, nullable=True)
+    userid = Column(Integer, ForeignKey('users.id', ondelete='CASCADE'), nullable=False)
     amount = Column(Integer, nullable=True)
     month = Column(String(20), nullable=True)
     year = Column(Integer, nullable=True)
@@ -92,7 +92,7 @@ class Transactions(Base):
     )
 
     id = Column(Integer, primary_key=True)
-    user_id = Column(Integer, nullable=False)
+    user_id = Column(Integer, ForeignKey('users.id', ondelete='CASCADE'), nullable=False)
     trans_type = Column(String(20), nullable=False)
     ref_id = Column(Integer, nullable=False)
     amount = Column(Integer, nullable=False)
