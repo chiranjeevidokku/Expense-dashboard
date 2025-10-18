@@ -5,18 +5,18 @@ from sqlalchemy.ext.declarative import declarative_base
 from database import Base
 
 
-class Users(Base):
-    __tablename__ = 'users'
-    __table_args__ = (
-        PrimaryKeyConstraint('id', name='users_pkey'),
-    )
+# class Users(Base):
+#     __tablename__ = 'users'
+#     __table_args__ = (
+#         PrimaryKeyConstraint('id', name='users_pkey'),
+#     )
 
-    id = Column(Integer, primary_key=True)
-    name = Column(String(50), nullable=False)
+#     id = Column(Integer, primary_key=True)
+#     name = Column(String(50), nullable=False)
 
-    expenditure = relationship('Expenditure', back_populates='users', cascade='all, delete-orphan', passive_deletes=True)
-    income = relationship('Income', back_populates='users', cascade='all, delete-orphan', passive_deletes=True)
-    savings = relationship('Savings', back_populates='users', cascade='all, delete-orphan', passive_deletes=True)
+#     expenditure = relationship('Expenditure', back_populates='users', cascade='all, delete-orphan', passive_deletes=True)
+#     income = relationship('Income', back_populates='users', cascade='all, delete-orphan', passive_deletes=True)
+#     savings = relationship('Savings', back_populates='users', cascade='all, delete-orphan', passive_deletes=True)
 
 
 class Expenditure(Base):
