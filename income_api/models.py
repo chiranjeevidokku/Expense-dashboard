@@ -2,17 +2,16 @@ from sqlalchemy import Column, Integer, String, ForeignKey, ForeignKeyConstraint
 from sqlalchemy.orm import relationship
 from database import Base
 
-
-class Expenditure(Base):
-    __tablename__ = 'expenditure'
+class Income(Base):
+    __tablename__ = 'income'
     __table_args__ = (
         ForeignKeyConstraint(
             ['userid'], 
             ['users.id'], 
-            name='expenditure_userid_fkey',
+            name='income_userid_fkey', 
             ondelete='CASCADE'
         ),
-        PrimaryKeyConstraint('id', name='expenditure_pkey'),
+        PrimaryKeyConstraint('id', name='income_pkey'),
     )
 
     id = Column(Integer, primary_key=True)
@@ -22,4 +21,4 @@ class Expenditure(Base):
     month = Column(String(20), nullable=True)
     year = Column(Integer, nullable=True)
 
-    users = relationship('Users', back_populates='expenditure')
+    users = relationship('Users', back_populates='income')
