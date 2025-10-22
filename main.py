@@ -1,12 +1,10 @@
 from fastapi import FastAPI
 from user_api.resources import user_router
-from savings_api.resources import savings_router
-from income_api.resources import income_router
-from expense_api.resources import expense_router
+from budget_api.resources import financial_router
+from transactions_api.resources import transaction_api
 
 app = FastAPI()
 
 app.include_router(user_router)
-app.include_router(savings_router)
-app.include_router(income_router)
-app.include_router(expense_router)
+app.include_router(financial_router)
+app.include_router(transaction_api)
